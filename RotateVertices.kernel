@@ -1,0 +1,12 @@
+__kernel void RotateVertices(__global float* vertices, const int axis, const float2 center, const float rotation){
+	int baseIndex = get_global_id(0) * 3;
+	int axis2 = (axis + 1) % 3;
+	float dim1 = vertices[baseIndex + axis] - center.x;
+	float dim2 = vertices[baseIndex + axis2] - center.y;
+	float sine = sin(rotation);
+	float cosine = cos(rotation);
+	float translation1 = (dim1 * cosine) - (dim2 * sine);
+	float translation2 = (dim1 * sine) + (dim2 * cosine);
+	vertices[baseIndex + axis] = translation1 + center.x;
+	vertices[baseIndex + axis2] = translation2 + center.y;
+}

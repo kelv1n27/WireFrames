@@ -1,0 +1,6 @@
+__kernel void TranslateVertices(__global float* vertices, const float4 translation){
+	int baseIndex = get_global_id(0) * 3;
+	vertices[baseIndex] = vertices[baseIndex] + translation.x;
+	vertices[baseIndex + 1] = vertices[baseIndex + 1] + translation.y;
+	vertices[baseIndex + 2] = vertices[baseIndex + 2] + translation.z;
+}
